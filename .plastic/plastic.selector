@@ -1,0 +1,4 @@
+repository "Breathing2@wechat_os_qy0yshqtino96i8qhare07kyg@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
