@@ -20,10 +20,12 @@ public class AnimationController : MonoBehaviour
     void Update()
     {
         float loudness = detector.GetLoudnessFromAudioClip(audioSource.timeSamples, audioSource.clip);
-        Debug.Log("Loudness" + loudness);
-        
+        Debug.Log("Loudness: " + loudness);
+        Debug.Log("Loudness Threshold: " + loudnessThreshold);
+
         if (loudness > loudnessThreshold){
             animator.Play(animationName);
+            Debug.Log("Playing Animation: " + animationName);
         }
     }
 }
