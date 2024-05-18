@@ -24,8 +24,10 @@ public class AnimationController : MonoBehaviour
         Debug.Log("Loudness Threshold: " + loudnessThreshold);
 
         if (loudness > loudnessThreshold){
-            animator.Play(animationName);
+            animator.SetBool("isPlaying", true);
             Debug.Log("Playing Animation: " + animationName);
+        }else{
+            animator.SetBool("isPlaying", false);
         }
     }
 }
