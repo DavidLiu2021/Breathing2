@@ -10,6 +10,8 @@ public class AnimationController : MonoBehaviour
     public float loudnessThreshold = 0.1f;
     public AudioLoudnessDetection detector;
 
+    private bool animationTriggered = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,15 @@ public class AnimationController : MonoBehaviour
         Debug.Log("Loudness: " + loudness);
         Debug.Log("Loudness Threshold: " + loudnessThreshold);
 
-        if (loudness > loudnessThreshold){
-            animator.SetBool("isPlaying", true);
+        if (loudness > loudnessThreshold && !animationTriggered){
+            animator.SetTrigger("PlayTrigger");
+            animationTriggered = true;
             Debug.Log("Playing Animation: " + animationName);
-        }else{
-            animator.SetBool("isPlaying", false);
+        }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f &&
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Blooming")){
+            animationTriggered = false;
         }
     }
 }

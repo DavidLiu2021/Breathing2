@@ -1162,7 +1162,7 @@ MonoBehaviour:
   audioSource: {fileID: 1862122340}
   animator: {fileID: 1251767462}
   animationName: Blooming
-  loudnessThreshold: 0.02
+  loudnessThreshold: 0.01
   detector: {fileID: 1862122339}
 --- !u!114 &1862122339
 MonoBehaviour:
@@ -1187,7 +1187,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 10fed8b2f95ed984a8ca276a05b8d919, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 810962e2ac4868442ad07c9372d44f65, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

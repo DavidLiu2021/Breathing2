@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioLoudnessDetection : MonoBehaviour
 {
-    public int sampleWindow = 64;
+    public int sampleWindow = 20;
     
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,6 @@ public class AudioLoudnessDetection : MonoBehaviour
     public float GetLoudnessFromAudioClip(int clipPosition, AudioClip clip){
         int startPosition = Mathf.Max(clipPosition - sampleWindow, 0);
         int samplesToRead = Mathf.Min(sampleWindow, clip.samples - startPosition);
-        
         if (samplesToRead <= 0) return 0f;
 
         float[] waveData = new float[sampleWindow];
