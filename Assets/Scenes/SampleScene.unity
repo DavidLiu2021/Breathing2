@@ -1935,6 +1935,7 @@ GameObject:
   - component: {fileID: 1646873031}
   - component: {fileID: 1646873029}
   - component: {fileID: 1646873030}
+  - component: {fileID: 1646873033}
   m_Layer: 0
   m_Name: ColorTestCube
   m_TagString: Untagged
@@ -2028,6 +2029,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1831892504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1646873033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646873028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2710361837e88e841ba8f570e256128d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectRenderer: {fileID: 1646873029}
 --- !u!1 &1831892501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2053,7 @@ GameObject:
   - component: {fileID: 1831892504}
   - component: {fileID: 1831892503}
   - component: {fileID: 1831892502}
+  - component: {fileID: 1831892505}
   m_Layer: 0
   m_Name: AudioToColor
   m_TagString: Untagged
@@ -2053,7 +2068,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831892501}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68ee52a3daacf2148a13a0d01a838b0c, type: 3}
   m_Name: 
@@ -2071,7 +2086,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 10fed8b2f95ed984a8ca276a05b8d919, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 116813d7f9c4a06418ea02a4e2b344e9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2173,6 +2188,19 @@ Transform:
   - {fileID: 1646873032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831892505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831892501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35db4767e25be044bcf0328a4b42934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 1831892503}
 --- !u!1 &1834928974
 GameObject:
   m_ObjectHideFlags: 0
