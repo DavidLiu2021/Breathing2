@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Get frequency info from AudioPeer, the 8 freqBands. then change the color based on freqBand selection
 public class AudioColorChanger : MonoBehaviour
 {
     public Renderer objectRenderer;
@@ -15,7 +16,7 @@ public class AudioColorChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float freqBandValue = AudioPeer._freqBand[6];
+        float freqBandValue = AudioPeer._freqBand[7]; // get pitch info from the freqBand[]
 
         Color color = FrequencyValueToColor(freqBandValue);
         objectRenderer.material.color = color;
@@ -23,6 +24,6 @@ public class AudioColorChanger : MonoBehaviour
 
     Color FrequencyValueToColor(float value){
         float hue = Mathf.Clamp01(value / 10f);
-        return Color.HSVToRGB(hue, 1.0f, 1.0f);
+        return Color.HSVToRGB(hue, 0.6f, 0.8f);
     }
 }

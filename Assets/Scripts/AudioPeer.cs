@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// get spectrum info and divide into 8 freqBands
 public class AudioPeer : MonoBehaviour
 {
     public AudioSource _audioSource;

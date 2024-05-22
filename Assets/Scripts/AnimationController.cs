@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// get loudness info from AudioLoudnessDetection, and control the animator
 public class AnimationController : MonoBehaviour
 {
     public AudioSource audioSource;
