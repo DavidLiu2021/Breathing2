@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioColorChanger : MonoBehaviour
 {
     public Renderer objectRenderer;
+    public int frequencyBandIndex;
     
     // Start is called before the first frame update
     void Start()
@@ -16,14 +17,14 @@ public class AudioColorChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float freqBandValue = AudioPeer._freqBand[7]; // get pitch info from the freqBand[]
+        float freqBandValue = AudioPeer._freqBand[frequencyBandIndex]; // get pitch info from the freqBand[]
 
         Color color = FrequencyValueToColor(freqBandValue);
         objectRenderer.material.color = color;
     }
 
     Color FrequencyValueToColor(float value){
-        float hue = Mathf.Clamp01(value / 10f);
-        return Color.HSVToRGB(hue, 0.6f, 0.8f);
+        float hue = Mathf.Clamp01(value / 9f);
+        return Color.HSVToRGB(hue, 0.4f, 0.5f);
     }
 }
