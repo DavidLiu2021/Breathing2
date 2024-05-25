@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 33098034}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a2f16a10d215ba044aca073e348d27db, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4d2337129f8ce7843a38299354ed44b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33098034}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 841d6f1f478c352499436b591e2046aa, type: 3}
   m_Name: 
@@ -186,7 +186,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 116813d7f9c4a06418ea02a4e2b344e9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ae68f1fc46eba7f43ae7d7dd53af1feb, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
