@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PitchAnimationController : MonoBehaviour
+public class FoxPitchAnimationController : MonoBehaviour
 {
     //Get frequency information from AudioPeer to use pitch/frequency to control the Fox animation
     
