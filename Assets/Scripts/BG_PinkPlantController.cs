@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantAnimationController : MonoBehaviour
+public class BG_PinkPlantController : MonoBehaviour
 {
-    public GameObject PlantPrefab;
-    public Animator animator1;
-    public Animator animator2;
+    public GameObject BGPlantPrefab;
     public float volumeThreshold = 0.0f;
     public float highPitchMultiplier = 1.0f;
     public float lowPitchMultiplier = 0.5f;
     public float spawnInterval = 0.05f;
+    public Vector2 spawnRange = new Vector2(10.0f, 10.0f);
 
     private List<GameObject> animatedObjects = new List<GameObject>();
     private float timeSinceLastSpawn = 0.0f;
-    private bool isAnimation1Playing = false;
     
     
     // Start is called before the first frame update
@@ -31,8 +29,6 @@ public class PlantAnimationController : MonoBehaviour
 
         // Frequency controls the animation play speed
         float pitch = GetPitch();
-        animator1.speed = pitch;
-        animator2.speed = pitch;
 
         foreach (var obj in animatedObjects){
             Animator animator = obj.GetComponent<Animator>();
@@ -43,7 +39,13 @@ public class PlantAnimationController : MonoBehaviour
 
         timeSinceLastSpawn += Time.deltaTime;
         if (currentVolume > volumeThreshold && timeSinceLastSpawn > spawnInterval){
-            GameObject newObject = Instantiate(PlantPrefab, transform.position, Quaternion.identity);
+            Vector3 randomPosition = new Vector3(
+                Random.Range(-spawnRange.x, spawnRange.x),
+                -0.6f,
+                Random.Range(-spawnRange.y, spawnRange.y)
+            );
+            
+            GameObject newObject = Instantiate(BGPlantPrefab, randomPosition, Quaternion.identity);
             Animator animator = newObject.GetComponent<Animator>();
             if (animator != null){
                 animator.SetBool("PlayAnimation", true);
@@ -53,15 +55,6 @@ public class PlantAnimationController : MonoBehaviour
             timeSinceLastSpawn = 0.0f;
         }
 
-        //two test plant animation controller
-        if (currentVolume > volumeThreshold && !isAnimation1Playing){
-            animator1.SetBool("PlayAnimation", true);
-            isAnimation1Playing = true;
-        }
-
-        if (isAnimation1Playing && animator1.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
-            animator2.SetBool("PlayAnimation", true);
-        }
     }
 
     private float GetCurrentVolume(){
