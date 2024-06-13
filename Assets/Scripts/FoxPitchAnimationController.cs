@@ -6,9 +6,13 @@ public class FoxPitchAnimationController : MonoBehaviour
 {
     //Get frequency information from AudioPeer to use pitch/frequency to control the Fox animation
     
-    //public Renderer objectRenderer;
+    // animation control
     public Animator animator;
     public float transitionDuration = 0.1f;
+
+    // transform control
+    public float speed = 5f;
+    public Vector3 direction = Vector3.forward;
 
     private int walkHash;
     private int runHash;
@@ -23,6 +27,8 @@ public class FoxPitchAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(direction * speed * Time.deltaTime);
+        
         float lowFreqBandValue = GetAverageFreqValue(0, 3);
         float highFreqBandValue = GetAverageFreqValue(4, 7);
 
