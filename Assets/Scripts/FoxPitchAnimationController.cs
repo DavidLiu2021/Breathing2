@@ -8,7 +8,7 @@ public class FoxPitchAnimationController : MonoBehaviour
     
     // animation control
     public Animator animator;
-    public float transitionDuration = 0.1f;
+    public float transitionDuration = 0.3f;
 
     // transform control
     public float runspeed = 5f;
