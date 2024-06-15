@@ -11,31 +11,44 @@ public class FoxPitchAnimationController : MonoBehaviour
     public float transitionDuration = 0.1f;
 
     // transform control
-    public float speed = 5f;
+    public float runspeed = 5f;
+    public float walkspeed  = 3f;
+    public float jumpforce = 4f;
     public Vector3 direction = Vector3.forward;
 
     private int walkHash;
     private int runHash;
+
+    private Rigidbody rb;
+    private bool isGrounded;
+    private bool inJumpTrigger = false;
     
     // Start is called before the first frame update
     void Start()
     {
         walkHash = Animator.StringToHash("Walk");
         runHash = Animator.StringToHash("Run");
+
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        transform.Translate(direction * speed * Time.deltaTime);
-        
+    {     
         float lowFreqBandValue = GetAverageFreqValue(0, 3);
         float highFreqBandValue = GetAverageFreqValue(4, 7);
 
-        if (highFreqBandValue > 0.1f){
+        if (highFreqBandValue > 0.1f && (!inJumpTrigger || !isGrounded)){
             animator.CrossFade(runHash, transitionDuration);
-        }else if (lowFreqBandValue > 0.1f){
+            transform.Translate(direction * runspeed * Time.deltaTime);
+        }else if (lowFreqBandValue > 0.1f && (!inJumpTrigger || !isGrounded)){
             animator.CrossFade(walkHash, transitionDuration);
+            transform.Translate(direction * walkspeed * Time.deltaTime);
+        }
+
+        // detect space key pressed
+        if (Input.GetKeyDown(KeyCode.Space)){
+            Jump();
         }
     }
 
@@ -45,5 +58,38 @@ public class FoxPitchAnimationController : MonoBehaviour
             sum += AudioPeer._freqBand[i];
         }
         return sum / (endBand - startBand + 1);
+    }
+
+    void OnCollisionEnter(Collision collision){
+        if (collision.gameObject.CompareTag("Ground")){
+            isGrounded = true;
+            animator.SetBool("isJumping", false);
+        }
+    }
+
+    void OnCollisionExit(Collision collision){
+        if (collision.gameObject.CompareTag("Ground")){
+            isGrounded = false;
+        }
+    }
+
+    public void Jump(){
+        if (isGrounded){
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            animator.SetBool("isJumping", true);
+            inJumpTrigger = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider other){
+        if (other.CompareTag("JumpTrigger")){
+            inJumpTrigger = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if (other.CompareTag("JumpTrigger")){
+            inJumpTrigger = false;
+        }
     }
 }
