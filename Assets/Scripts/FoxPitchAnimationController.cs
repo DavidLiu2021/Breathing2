@@ -8,19 +8,21 @@ public class FoxPitchAnimationController : MonoBehaviour
     
     // animation control
     public Animator animator;
-    public float transitionDuration = 0.3f;
+    public float transitionDuration = 0.2f;
+    public float toJumpDuration = 0.1f;
 
     // transform control
-    public float runspeed = 5f;
-    public float walkspeed  = 3f;
-    public float jumpforce = 4f;
+    public float runspeed = 6f;
+    public float walkspeed  = 5f;
+    public float jumpforce = 5f;
     public Vector3 direction = Vector3.forward;
 
     private int walkHash;
     private int runHash;
+    private int jumpHash;
 
     private Rigidbody rb;
-    private bool isGrounded;
+    private bool isGrounded = true;
     private bool inJumpTrigger = false;
     
     // Start is called before the first frame update
@@ -28,6 +30,7 @@ public class FoxPitchAnimationController : MonoBehaviour
     {
         walkHash = Animator.StringToHash("Walk");
         runHash = Animator.StringToHash("Run");
+        jumpHash = Animator.StringToHash("Jump");
 
         rb = GetComponent<Rigidbody>();
     }
@@ -63,7 +66,6 @@ public class FoxPitchAnimationController : MonoBehaviour
     void OnCollisionEnter(Collision collision){
         if (collision.gameObject.CompareTag("Ground")){
             isGrounded = true;
-            animator.SetBool("isJumping", false);
         }
     }
 
@@ -76,8 +78,8 @@ public class FoxPitchAnimationController : MonoBehaviour
     public void Jump(){
         if (isGrounded){
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            animator.SetBool("isJumping", true);
-            inJumpTrigger = false;
+            animator.CrossFade(jumpHash, toJumpDuration);
+            isGrounded = false;
         }
     }
 
