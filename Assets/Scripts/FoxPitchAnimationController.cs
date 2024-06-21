@@ -16,6 +16,7 @@ public class FoxPitchAnimationController : MonoBehaviour
     public float walkspeed  = 5f;
     public float jumpforce = 5f;
     public Vector3 direction = Vector3.forward;
+    public Transform GapLand02;
 
     private int walkHash;
     private int runHash;
@@ -23,7 +24,7 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrounded = true;
-    private bool inJumpTrigger = false;
+    private bool InGapTrigger = false;
     
     // Start is called before the first frame update
     void Start()
@@ -41,10 +42,10 @@ public class FoxPitchAnimationController : MonoBehaviour
         float lowFreqBandValue = GetAverageFreqValue(0, 3);
         float highFreqBandValue = GetAverageFreqValue(4, 7);
 
-        if (highFreqBandValue > 0.1f && (!inJumpTrigger || !isGrounded)){
+        if (highFreqBandValue > 0.1f && (!InGapTrigger || isGrounded)){
             animator.CrossFade(runHash, transitionDuration);
             transform.Translate(direction * runspeed * Time.deltaTime);
-        }else if (lowFreqBandValue > 0.1f && (!inJumpTrigger || !isGrounded)){
+        }else if (lowFreqBandValue > 0.1f && (!InGapTrigger || isGrounded)){
             animator.CrossFade(walkHash, transitionDuration);
             transform.Translate(direction * walkspeed * Time.deltaTime);
         }
@@ -53,6 +54,12 @@ public class FoxPitchAnimationController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)){
             Jump();
         }
+
+        // jump across the gap
+        if (InGapTrigger && Input.GetKeyDown(KeyCode.Space)){
+            JumpGap();
+        }
+
     }
 
     float GetAverageFreqValue(int startBand, int endBand){
@@ -85,13 +92,18 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if (other.CompareTag("JumpTrigger")){
-            inJumpTrigger = true;
+            InGapTrigger = true;
         }
     }
 
     void OnTriggerExit(Collider other){
         if (other.CompareTag("JumpTrigger")){
-            inJumpTrigger = false;
+            InGapTrigger = false;
         }
+    }
+
+    void JumpGap(){
+        transform.position = GapLand02.position + new Vector3(0, 1, 0);
+        animator.CrossFade(jumpHash, toJumpDuration);
     }
 }
