@@ -206,8 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 33098035}
-  transitionDuration: 0.001
-  toJumpDuration: 0.1
+  jumpDuration: 0.5
   runspeed: 3
   walkspeed: 2
   jumpforce: 5
@@ -653,7 +652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &423093176
 MonoBehaviour:
   m_ObjectHideFlags: 0
