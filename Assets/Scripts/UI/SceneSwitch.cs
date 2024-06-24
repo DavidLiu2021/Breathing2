@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class SceneSwitch : MonoBehaviour
 {
-    public void PlayGame(){
-        SceneManager.LoadScene("Selection_Animal");
+
+    public void ConfirmAnimal(){
+        SceneManager.LoadScene("Selection_Landscape");
     }
 
-    public void QuitGame(){
-        Application.Quit();
+    public void ConfirmLandscape(){
+        SceneManager.LoadScene("Selection_Decoration");
     }
-
     
     // Start is called before the first frame update
     void Start()
