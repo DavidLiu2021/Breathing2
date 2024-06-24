@@ -15,13 +15,12 @@ public class FoxPitchAnimationController : MonoBehaviour
     public float walkspeed  = 5f;
     public float jumpforce = 5f;
     public Transform GapLand02;
-
-    private int walkHash;
-    private int runHash;
-    private int jumpHash;
+    public Transform checkBox;
+    public LayerMask layermask;
 
     private Rigidbody rb;
     private bool isGrounded = true;
+    private bool isJumping = false;
     private bool inGapTrigger = false;
     
     // Start is called before the first frame update
@@ -33,33 +32,26 @@ public class FoxPitchAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        // float lowFreqBandValue = GetAverageFreqValue(0, 3);
-        // float highFreqBandValue = GetAverageFreqValue(4, 7);
+        MoveControl();
+        UpdateAnimations();
 
-        // if (highFreqBandValue > 0.1f && (!inGapTrigger || isGrounded)){
-        //     animator.CrossFade(runHash, 0.01f);
-        //     transform.Translate(Vector3.forward * runspeed * Time.deltaTime);
-        // }else if (lowFreqBandValue > 0.1f && (!inGapTrigger || isGrounded)){
-        //     animator.CrossFade(walkHash, 0.01f);
-        //     transform.Translate(Vector3.forward * walkspeed * Time.deltaTime);
-        // }
+    }
 
+    private void MoveControl(){
+        animator.SetFloat("speed", speed());
         transform.Translate(Vector3.forward * speed() * Time.deltaTime);
+        isGrounded = Physics.CheckSphere(checkBox.position, 0.1f, layermask);
 
         // detect space key pressed
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
-            animator.SetBool("jump", true);
             Jump();
         }
-        animator.SetBool("jump", !isGrounded);
 
         // jump across the gap
         if (inGapTrigger && Input.GetKeyDown(KeyCode.Space)){
             // JumpGap();
             StartCoroutine(JumppGap());
         }
-
-        animator.SetFloat("speed", speed());
     }
 
     float GetAverageFreqValue(int startBand, int endBand){
@@ -83,24 +75,20 @@ public class FoxPitchAnimationController : MonoBehaviour
         return 0f;
     }
 
-    void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("Ground")){
-            isGrounded = true;
-        }
-    }
-
-    void OnCollisionExit(Collision collision){
-        if (collision.gameObject.CompareTag("Ground")){
-            isGrounded = false;
+    void UpdateAnimations(){
+        if (isJumping && isGrounded){
+            isJumping = false;
+            animator.SetBool("onGround", true);
+        }else if(!isGrounded){
+            animator.SetBool("onGround", false);
         }
     }
 
     public void Jump(){
-        if (isGrounded){
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            // animator.SetBool("jump", false);
-            isGrounded = false;
-        }
+        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        isJumping = true;
+        animator.SetTrigger("Jump");
+        // isGrounded = false;
     }
 
     void OnTriggerEnter(Collider other){
