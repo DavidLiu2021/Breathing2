@@ -225,7 +225,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ae68f1fc46eba7f43ae7d7dd53af1feb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 83d727236fb8019458b1a2d407b9c270, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -532,7 +532,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257623568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f6b1cf34cd6a4c4f9ca9082a08a545b, type: 3}
   m_Name: 
@@ -541,7 +541,7 @@ MonoBehaviour:
   volumeThreshold: 0
   highPitchMultiplier: 0.8
   lowPitchMultiplier: 0.2
-  spawnInterval: 1.53
+  spawnInterval: 1.96
   spawnXRange: {x: -9.66, y: 22.1}
   spawnZRange: {x: -2.05, y: 23.8}
 --- !u!4 &257623570
@@ -659,7 +659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &423093176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,7 +805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4340555707901484, guid: 671a5f04bd2c9ef45b3fa427ee4c143d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.1
+      value: 35.58
       objectReference: {fileID: 0}
     - target: {fileID: 4340555707901484, guid: 671a5f04bd2c9ef45b3fa427ee4c143d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1586,6 +1586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LS_InitialRock
       objectReference: {fileID: 0}
+    - target: {fileID: 5340239030921630977, guid: da25284efd3534d499d4efa34f4d1312, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1854,6 +1858,10 @@ PrefabInstance:
     - target: {fileID: 1745671036675386, guid: 74442f407a24ac84f95f08a83b1bb617, type: 3}
       propertyPath: m_Name
       value: Rock_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745671036675386, guid: 74442f407a24ac84f95f08a83b1bb617, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1745671036675386, guid: 74442f407a24ac84f95f08a83b1bb617, type: 3}
       propertyPath: m_TagString
@@ -2520,15 +2528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.55
+      value: 10.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.76
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.68
+      value: -9.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3063,7 +3071,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 0.9941191, z: 1}
   m_Center: {x: 0, y: -0.0029404163, z: 0}

@@ -20,7 +20,6 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrounded = true;
-    private bool isJumping = false;
     private bool inGapTrigger = false;
     
     // Start is called before the first frame update
@@ -34,15 +33,14 @@ public class FoxPitchAnimationController : MonoBehaviour
     {     
         MoveControl();
         UpdateAnimations();
-
     }
 
     private void MoveControl(){
         animator.SetFloat("speed", speed());
         transform.Translate(Vector3.forward * speed() * Time.deltaTime);
-        isGrounded = Physics.CheckSphere(checkBox.position, 0.1f, layermask);
+        isGrounded = Physics.CheckSphere(checkBox.position, 0.01f, layermask);
 
-        // detect space key pressed
+        // detect space key presseds
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
             Jump();
         }
@@ -76,19 +74,16 @@ public class FoxPitchAnimationController : MonoBehaviour
     }
 
     void UpdateAnimations(){
-        if (isJumping && isGrounded){
-            isJumping = false;
+        if (isGrounded){
             animator.SetBool("onGround", true);
-        }else if(!isGrounded){
+        }else{
             animator.SetBool("onGround", false);
         }
     }
 
     public void Jump(){
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-        isJumping = true;
         animator.SetTrigger("Jump");
-        // isGrounded = false;
     }
 
     void OnTriggerEnter(Collider other){
@@ -105,7 +100,6 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     void JumpGap(){
         transform.position = GapLand02.position + new Vector3(0, 1, 0);
-        // animator.CrossFade(jumpHash, 0.1f);
     }
 
     IEnumerator JumppGap()
