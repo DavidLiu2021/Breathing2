@@ -37,8 +37,11 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     private void MoveControl(){
         animator.SetFloat("speed", speed());
-        transform.Translate(Vector3.forward * speed() * Time.deltaTime);
         isGrounded = Physics.CheckSphere(checkBox.position, 0.01f, layermask);
+
+        if (!inGapTrigger){
+            transform.Translate(Vector3.forward * speed() * Time.deltaTime);
+        }
 
         // detect space key presseds
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
@@ -49,6 +52,8 @@ public class FoxPitchAnimationController : MonoBehaviour
         if (inGapTrigger && Input.GetKeyDown(KeyCode.Space)){
             // JumpGap();
             StartCoroutine(JumppGap());
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -98,9 +103,9 @@ public class FoxPitchAnimationController : MonoBehaviour
         }
     }
 
-    void JumpGap(){
-        transform.position = GapLand02.position + new Vector3(0, 1, 0);
-    }
+    // void JumpGap(){
+    //     transform.position = GapLand02.position + new Vector3(0, 1, 0);
+    // }
 
     IEnumerator JumppGap()
     {
@@ -108,6 +113,9 @@ public class FoxPitchAnimationController : MonoBehaviour
         Vector3 endPosition = GapLand02.position + new Vector3(0, 1, 0);
         float elapsedTime = 0f;
 
+        // rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        // animator.SetTrigger("Jump");
+        
 
         while (elapsedTime < jumpDuration){
             transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / jumpDuration);

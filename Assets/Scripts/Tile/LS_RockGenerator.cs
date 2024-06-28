@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// 
+/// Abandoned
+/// </summary>
 public class LS_RockGenerator : MonoBehaviour
 {
     public GameObject[] landscapes;
