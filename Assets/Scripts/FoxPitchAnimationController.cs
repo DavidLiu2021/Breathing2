@@ -21,6 +21,7 @@ public class FoxPitchAnimationController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded = true;
     private bool inGapTrigger = false;
+    private bool canMove = true;
     
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class FoxPitchAnimationController : MonoBehaviour
         animator.SetFloat("speed", speed());
         isGrounded = Physics.CheckSphere(checkBox.position, 0.01f, layermask);
 
-        if (!inGapTrigger){
+        if (!inGapTrigger && canMove){
             transform.Translate(Vector3.forward * speed() * Time.deltaTime);
         }
 
@@ -124,5 +125,9 @@ public class FoxPitchAnimationController : MonoBehaviour
         }
 
         transform.position = endPosition; 
+    }
+
+    public void SetCanMove(bool value){
+        canMove = value;
     }
 }

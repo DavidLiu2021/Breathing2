@@ -10,22 +10,55 @@ public class ActiveDialogue : MonoBehaviour
 
     public GameObject subtitleUI;
     private bool isZoomedIn = false;
+    private bool inNPCtrigger = false;
+    private FoxPitchAnimationController foxMove;
+    private bool NPCactive = false;
 
     void Start()
     {
         defaultCamera.gameObject.SetActive(true);
         zoomedCamera.gameObject.SetActive(false);
         subtitleUI.SetActive(false);
+
+        foxMove = GetComponent<FoxPitchAnimationController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)){
+        if (!inNPCtrigger){
+            foxMove.SetCanMove(true);
+        }else if (Input.GetKeyDown(KeyCode.E)){
             if (isZoomedIn){
                 ZoomOut();
             }else{
                 ZoomIn();
             }
+            foxMove.SetCanMove(true);
+            NPCactive = true;
+        }else{
+            foxMove.SetCanMove(false);
+        }
+
+        if (inNPCtrigger){
+            Debug.Log("inNPCTrigger");
+        }
+
+        if (NPCactive){
+            foxMove.SetCanMove(true);
+        }
+    }
+
+    
+
+    void OnTriggerEnter(Collider other){
+        if (other.CompareTag("NPCTrigger")){
+            inNPCtrigger = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if (other.CompareTag("NPCTrigger")){
+            inNPCtrigger = false;
         }
     }
 
