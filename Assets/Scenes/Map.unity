@@ -210,7 +210,6 @@ MonoBehaviour:
   runspeed: 3
   walkspeed: 2
   jumpforce: 6
-  GapLand02: {fileID: 194753465}
   checkBox: {fileID: 1248707322}
   layermask:
     serializedVersion: 2
@@ -531,11 +530,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da25284efd3534d499d4efa34f4d1312, type: 3}
---- !u!4 &194753465 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4591071557688290802, guid: 17104f5c06612324bb4a0cc55c4a1b18, type: 3}
-  m_PrefabInstance: {fileID: 3208971891534978751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &251376306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -922,7 +916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5431560189432981074, guid: d0cba3a9b63f76049bb7f873d499079d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.84
+      value: 7.59
       objectReference: {fileID: 0}
     - target: {fileID: 5431560189432981074, guid: d0cba3a9b63f76049bb7f873d499079d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3335,7 +3329,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3416,7 +3410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.84
+      value: 10.19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3424,7 +3418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.51
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6cdd86a1fad8aed49b0d470fb238a321, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4350,7 +4344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8628441406005427936, guid: a0d316edcb7a0a64fafe81204ddd0067, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.91
+      value: 7.95
       objectReference: {fileID: 0}
     - target: {fileID: 8628441406005427936, guid: a0d316edcb7a0a64fafe81204ddd0067, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4358,7 +4352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8628441406005427936, guid: a0d316edcb7a0a64fafe81204ddd0067, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.37
+      value: 59.99
       objectReference: {fileID: 0}
     - target: {fileID: 8628441406005427936, guid: a0d316edcb7a0a64fafe81204ddd0067, type: 3}
       propertyPath: m_LocalRotation.w

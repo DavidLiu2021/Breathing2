@@ -8,20 +8,21 @@ public class FoxPitchAnimationController : MonoBehaviour
     
     // animation control
     public Animator animator;
-    public float jumpDuration = 1.5f;
+    public float jumpDuration = 1.5f; // the time duration that fox jump across the gap
 
     // transform control
     public float runspeed = 6f;
     public float walkspeed  = 5f;
     public float jumpforce = 5f;
-    public Transform GapLand02;
-    public Transform checkBox;
-    public LayerMask layermask;
+    // public Transform GapLand02;
+    public Transform checkBox; // detect whether the fox collides with the ground
+    public LayerMask layermask; // detect the Ground layer
 
     private Rigidbody rb;
     private bool isGrounded = true;
     private bool inGapTrigger = false;
-    private bool canMove = true;
+    private Vector3 gapPosition;
+    private bool canMove = true; // defined in ActiveDialogue scripts
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class FoxPitchAnimationController : MonoBehaviour
         UpdateAnimations();
     }
 
+    // Defines the basic movement including speed, normal jump and gap jump
     private void MoveControl(){
         animator.SetFloat("speed", speed());
         isGrounded = Physics.CheckSphere(checkBox.position, 0.01f, layermask);
@@ -51,12 +53,11 @@ public class FoxPitchAnimationController : MonoBehaviour
 
         // jump across the gap
         if (inGapTrigger && Input.GetKeyDown(KeyCode.Space)){
-            // rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            // animator.SetTrigger("Jump");
-            StartCoroutine(JumppGap());
+            StartCoroutine(JumpGap(gapPosition));
         }
     }
 
+    // use AuidoPeer script to get the audio frequency information, and then control the movement speed
     float GetAverageFreqValue(int startBand, int endBand){
         float sum = 0;
         for (int i = startBand; i <= endBand; i++){
@@ -78,6 +79,7 @@ public class FoxPitchAnimationController : MonoBehaviour
         return 0f;
     }
 
+    // update the bool value in animator
     void UpdateAnimations(){
         if (isGrounded){
             animator.SetBool("onGround", true);
@@ -86,14 +88,17 @@ public class FoxPitchAnimationController : MonoBehaviour
         }
     }
 
+    // define the normal jump (not in the gap position)
     public void Jump(){
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
         // rb.AddForce(Vector3.forward * jumpforce, ForceMode.Impulse);
         animator.SetTrigger("Jump");
     }
 
+    // detect whether the fox is near the gap
     void OnTriggerEnter(Collider other){
         if (other.CompareTag("JumpTrigger")){
+            gapPosition = other.transform.position;
             inGapTrigger = true;
         }
     }
@@ -104,14 +109,12 @@ public class FoxPitchAnimationController : MonoBehaviour
         }
     }
 
-    // void JumpGap(){
-    //     transform.position = GapLand02.position + new Vector3(0, 1, 0);
-    // }
-
-    IEnumerator JumppGap()
+    // define the gap jump
+    IEnumerator JumpGap(Vector3 currentPosition)
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = GapLand02.position + new Vector3(0, 1, 0);
+        // Vector3 endPosition = GapLand02.position + new Vector3(0, 1, 0);
+        Vector3 endPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z) + new Vector3(0, 0, 6);
         float elapsedTime = 0f;
 
         rb.isKinematic = true;
@@ -135,6 +138,7 @@ public class FoxPitchAnimationController : MonoBehaviour
         rb.isKinematic = false;
     }
 
+    // see more details in ActiveDialogue scripts
     public void SetCanMove(bool value){
         canMove = value;
     }
