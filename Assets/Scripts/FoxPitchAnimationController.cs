@@ -51,10 +51,9 @@ public class FoxPitchAnimationController : MonoBehaviour
 
         // jump across the gap
         if (inGapTrigger && Input.GetKeyDown(KeyCode.Space)){
-            // JumpGap();
+            // rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            // animator.SetTrigger("Jump");
             StartCoroutine(JumppGap());
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            animator.SetTrigger("Jump");
         }
     }
 
@@ -89,6 +88,7 @@ public class FoxPitchAnimationController : MonoBehaviour
 
     public void Jump(){
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        // rb.AddForce(Vector3.forward * jumpforce, ForceMode.Impulse);
         animator.SetTrigger("Jump");
     }
 
@@ -114,17 +114,25 @@ public class FoxPitchAnimationController : MonoBehaviour
         Vector3 endPosition = GapLand02.position + new Vector3(0, 1, 0);
         float elapsedTime = 0f;
 
-        // rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-        // animator.SetTrigger("Jump");
+        rb.isKinematic = true;
+
+        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        animator.SetTrigger("Jump");
         
 
         while (elapsedTime < jumpDuration){
-            transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / jumpDuration);
+            // transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / jumpDuration);
+
+            float t = elapsedTime / jumpDuration;
+            float height = 4 * 2f * (t - t * t);
+            transform.position = Vector3.Lerp(startPosition, endPosition, t) + new Vector3(0, height, 0);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         transform.position = endPosition; 
+        rb.isKinematic = false;
     }
 
     public void SetCanMove(bool value){

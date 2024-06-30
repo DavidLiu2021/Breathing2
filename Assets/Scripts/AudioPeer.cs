@@ -7,22 +7,30 @@ public class AudioPeer : MonoBehaviour
 {
     public AudioSource _audioSource;
     public static float[] _samples = new float[512];
-    public static float[] _freqBand = new float[8];
+    public static float[] _freqBand = new float[8]; //the average value of 8 freqbands in a audio clip
     
     
-    // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        // StartMicrophone();
     }
 
-    // Update is called once per frame
     void Update()
     {
         GetSpectrumAudioSource();
         MakeFrequencyBands();
     }
 
+    // void StartMicrophone()
+    // {
+    //     // Microphone.devices[0]
+    //     _audioSource.clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
+    //     // _audioSource.loop = true; // Loop the audio source to prevent it from stopping
+    //     // _audioSource.mute = true;
+    //     while (!(Microphone.GetPosition(null) > 0)) { } // Wait until the recording has started
+    //     _audioSource.Play();
+    // }
 
     void GetSpectrumAudioSource(){
         _audioSource.GetSpectrumData(_samples, 0, FFTWindow.Blackman);

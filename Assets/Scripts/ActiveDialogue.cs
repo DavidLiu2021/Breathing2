@@ -39,9 +39,6 @@ public class ActiveDialogue : MonoBehaviour
             foxMove.SetCanMove(false);
         }
 
-        if (inNPCtrigger){
-            Debug.Log("inNPCTrigger");
-        }
 
         if (NPCactive){
             foxMove.SetCanMove(true);
