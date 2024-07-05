@@ -11,6 +11,7 @@ public class BG_PinkPlantController : MonoBehaviour
     public float spawnInterval = 0.05f;
     public Vector2 spawnXRange = new Vector2(10.0f, 10.0f);
     public Vector2 spawnZRange = new Vector2(10.0f, 10.0f);
+    public float yPosition = 2f;
 
     private List<GameObject> animatedObjects = new List<GameObject>();
     private float timeSinceLastSpawn = 0.0f;
@@ -54,7 +55,7 @@ public class BG_PinkPlantController : MonoBehaviour
         for (int i = 0; i < count; i++){
             Vector3 randomPosition = new Vector3(
                 Random.Range(spawnXRange.x, spawnXRange.y),
-                -1.9f,
+                yPosition,
                 Random.Range(spawnZRange.x, spawnZRange.y)
             );
 
