@@ -67,8 +67,8 @@ public class FoxPitchAnimationController : MonoBehaviour
     }
 
     float speed(){
-        float HighPitch = GetAverageFreqValue(3, 7);
-        float LowPitch = GetAverageFreqValue(0, 2);
+        float HighPitch = GetAverageFreqValue(2, 7);
+        float LowPitch = GetAverageFreqValue(0, 1);
 
         if (LowPitch > 0.1f){
             return walkspeed;
