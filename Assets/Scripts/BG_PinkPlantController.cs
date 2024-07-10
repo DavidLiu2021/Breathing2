@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Control the spawn rate and animation play speed of the prefab
+/// </summary>
+
 public class BG_PinkPlantController : MonoBehaviour
 {
     public GameObject BGPlantPrefab;
@@ -17,19 +21,17 @@ public class BG_PinkPlantController : MonoBehaviour
     private float timeSinceLastSpawn = 0.0f;
     
     
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Get loudness info
+        // get loudness info
         float currentVolume = GetCurrentVolume();
 
-        // Frequency controls the animation play speed
+        // frequency controls the animation play speed
         float pitch = GetPitch();
 
         foreach (var obj in animatedObjects){
@@ -51,6 +53,7 @@ public class BG_PinkPlantController : MonoBehaviour
         }
     }
 
+    // define the area where prefabs spawn and animation play speed
     private void SpawnObjects(int count, float pitch){
         for (int i = 0; i < count; i++){
             Vector3 randomPosition = new Vector3(
@@ -69,6 +72,7 @@ public class BG_PinkPlantController : MonoBehaviour
         }
     }
     
+    // get the audio volume
     private float GetCurrentVolume(){
         float sum = 0f;
         foreach (var sample in AudioPeer._samples){
@@ -77,7 +81,7 @@ public class BG_PinkPlantController : MonoBehaviour
         return Mathf.Sqrt(sum / AudioPeer._samples.Length);
     }
 
-    // Get the highest freq in 4-7 freqBand
+    // get the highest freq in 4-7 freqBand
     private float GetHighPitch(){
         float maxFreq = 0f;
         for (int i = 4; i < 8; i++){
@@ -88,7 +92,7 @@ public class BG_PinkPlantController : MonoBehaviour
         return maxFreq;
     }
 
-    // Get the highest freq in 0-3 freqBand
+    // get the highest freq in 0-3 freqBand
     private float GetLowPitch(){
         float maxFreq = 0f;
         for (int i = 0; i < 4; i++){

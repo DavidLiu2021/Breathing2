@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Press [E] to interact with bird NPC when entering NPC area, press [E] to jump out of the conversation
+/// Fox will be stopped by a Log, press [F] to destroy the Log and keep moving
+/// </summary>
+
 public class ActiveDialogue : MonoBehaviour
 {
     public Camera defaultCamera;
@@ -54,17 +59,17 @@ public class ActiveDialogue : MonoBehaviour
 
 
         if (NPCactive){
-            foxMove.SetCanMove(true);
+            foxMove.SetCanMove(true); // Once player finishes the conversation, fox can keep moving
         }
 
         if (Logactive){
             ZoomOut();
-            foxMove.SetCanMove(true);
+            foxMove.SetCanMove(true); // Once player destroys the log, fox can keep moving
         }
     }
 
-    
 
+    // trigger area detection
     void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPCTrigger")){
             inNPCtrigger = true;
@@ -85,22 +90,16 @@ public class ActiveDialogue : MonoBehaviour
         }
     }
 
-
-
-
+    // switch between the main camera and zoomed camera
     void ZoomIn(){
         defaultCamera.gameObject.SetActive(false);
         zoomedCamera.gameObject.SetActive(true);
-        // transform.LookAt(npcTransform);
-        // subtitleUI.SetActive(true);
         isZoomedIn = true;
     }
 
     void ZoomOut(){
         defaultCamera.gameObject.SetActive(true);
         zoomedCamera.gameObject.SetActive(false);
-        // transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        // subtitleUI.SetActive(false);
         isZoomedIn = false;
     }
 }

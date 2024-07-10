@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Attach the camera to the character
+/// </summary>
+
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;

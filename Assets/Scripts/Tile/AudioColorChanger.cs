@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Get frequency info from AudioPeer, the 8 freqBands. then change the color based on freqBand selection
+
+/// <summary>
+/// Get frequency info from AudioPeer, the 8 freqBands. then change the color based on freqBand selection
+/// </summary>
 public class AudioColorChanger : MonoBehaviour
 {
     public Renderer objectRenderer;

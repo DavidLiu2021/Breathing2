@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Detect whether the character is near the tiles
+/// Control the animator of tiles
+/// </summary>
+
 public class TileRiseController : MonoBehaviour
 {
     public Transform player;

@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Get frequency information from AudioPeer to use pitch/frequency to control the Fox animation
+/// Control the basic movement of the character
+/// </summary>
+
 public class FoxPitchAnimationController : MonoBehaviour
 {
-    //Get frequency information from AudioPeer to use pitch/frequency to control the Fox animation
     
     // animation control
     public Animator animator;
     public float jumpDuration = 1.5f; // the time duration that fox jump across the gap
 
-    // transform control
+    // movement control
     public float runspeed = 6f;
     public float walkspeed  = 5f;
     public float jumpforce = 5f;
-    // public Transform GapLand02;
     public Transform checkBox; // detect whether the fox collides with the ground
     public LayerMask layermask; // detect the Ground layer
 
@@ -22,22 +25,20 @@ public class FoxPitchAnimationController : MonoBehaviour
     private bool isGrounded = true;
     private bool inGapTrigger = false;
     private Vector3 gapPosition;
-    private bool canMove = true; // defined in ActiveDialogue scripts
+    private bool canMove = true; // false when character is either in NPC's conversation or blocked by the Log, details in ActiveDialogue script
     
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {     
         MoveControl();
         UpdateAnimations();
     }
 
-    // Defines the basic movement including speed, normal jump and gap jump
+    // defines the basic movement including speed, normal jump and gap jump
     private void MoveControl(){
         animator.SetFloat("speed", speed());
         isGrounded = Physics.CheckSphere(checkBox.position, 0.01f, layermask);
@@ -46,12 +47,12 @@ public class FoxPitchAnimationController : MonoBehaviour
             transform.Translate(Vector3.forward * speed() * Time.deltaTime);
         }
 
-        // detect space key presseds
+        // press [space] to jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
             Jump();
         }
 
-        // jump across the gap
+        // press [space] to jump across the gap
         if (inGapTrigger && Input.GetKeyDown(KeyCode.Space)){
             StartCoroutine(JumpGap(gapPosition));
         }
@@ -91,7 +92,6 @@ public class FoxPitchAnimationController : MonoBehaviour
     // define the normal jump (not in the gap position)
     public void Jump(){
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-        // rb.AddForce(Vector3.forward * jumpforce, ForceMode.Impulse);
         animator.SetTrigger("Jump");
     }
 
@@ -109,11 +109,13 @@ public class FoxPitchAnimationController : MonoBehaviour
         }
     }
 
-    // define the gap jump
+    /* define the gap jump
+    *  character will start jumping from its current position in a parabolic curve
+    *  and land in defined distance from its startposition
+    */
     IEnumerator JumpGap(Vector3 currentPosition)
     {
         Vector3 startPosition = transform.position;
-        // Vector3 endPosition = GapLand02.position + new Vector3(0, 1, 0);
         Vector3 endPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z) + new Vector3(0, 0, 6);
         float elapsedTime = 0f;
 
@@ -124,7 +126,6 @@ public class FoxPitchAnimationController : MonoBehaviour
         
 
         while (elapsedTime < jumpDuration){
-            // transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / jumpDuration);
 
             float t = elapsedTime / jumpDuration;
             float height = 4 * 2f * (t - t * t);
